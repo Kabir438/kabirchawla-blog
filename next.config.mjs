@@ -1,4 +1,18 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    images: {
+        remotePatterns: [
+            {
+                hostname: "cdn.sanity.io"
+            },
+            {
+                hostname: "api.dicebear.com"
+            }
+        ]
+    },
+    experiments: {
+        asyncWebAssembly: true
+    }
+};
 
 export default nextConfig;
