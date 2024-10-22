@@ -21,7 +21,8 @@ const codeSchema = z.object({
   _type: z.literal("code"),
   _key: z.string(),
   code: z.string(),
-  language: z.string()
+  language: z.string(),
+  filename: z.string().optional()
 });
 
 const youtubeVideoSchema = z.object({

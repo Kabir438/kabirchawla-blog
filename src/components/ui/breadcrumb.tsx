@@ -51,12 +51,12 @@ const BreadcrumbLink = React.forwardRef<
 
   return (
     // @ts-expect-error Works
-    <Comp
+    (<Comp
       ref={ref}
       className={cn("transition-colors hover:text-foreground", className)}
       {...props}
-    />
-  )
+    />)
+  );
 })
 BreadcrumbLink.displayName = "BreadcrumbLink"
 

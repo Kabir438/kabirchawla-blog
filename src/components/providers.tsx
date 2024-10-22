@@ -11,7 +11,7 @@ const queryClient = new QueryClient()
 export default function Providers({ children }: PropsWithChildren) {
     return (
         <QueryClientProvider client={queryClient}>
-            <NextProgress delay={150} options={{ showSpinner: false }} />
+            {/* <NextProgress delay={150} options={{ showSpinner: false }} /> */}
             {children}
         </QueryClientProvider>
     )

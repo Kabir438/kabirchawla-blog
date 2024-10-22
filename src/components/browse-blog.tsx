@@ -113,60 +113,57 @@ export default function BrowseBlog({
             setSearchQuery("")
         }
     }, [searchQuery, sortingTechnique])
-    return (
-        <>
-            <div className="flex justify-between items-center w-full">
-                <div className="relative">
-                    <Input
-                        value={searchQuery}
-                        onChange={(ev) => setSearchQuery(ev.target.value)}
-                        id="search"
-                        placeholder="Search..."
-                        type="text"
-                        className="placeholder:text-gray-300"
-                    />
-                    <Search className="absolute w-4 h-4 right-1 top-1/2 text-gray-300 -translate-y-1/2 -translate-x-1/2" />
-                </div>
-                <div className="flex gap-2">
-                    <Filters
-                        categories={chosenCategories}
-                        setCategories={setChosenCategories}
-                        options={simplifyCategories(categories)}
-                    />
-                    <Sort sortingTechnique={sortingTechnique} setSortingTechnique={setSortingTechnique} />
-                </div>
+    return (<>
+        <div className="flex justify-between items-center w-full">
+            <div className="relative">
+                <Input
+                    value={searchQuery}
+                    onChange={(ev) => setSearchQuery(ev.target.value)}
+                    id="search"
+                    placeholder="Search..."
+                    type="text"
+                    className="placeholder:text-gray-300"
+                />
+                <Search className="absolute w-4 h-4 right-1 top-1/2 text-gray-300 -translate-y-1/2 -translate-x-1/2" />
             </div>
-            <div className="w-fit mx-auto mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-center">
+            <div className="flex gap-2">
+                <Filters
+                    categories={chosenCategories}
+                    setCategories={setChosenCategories}
+                    options={simplifyCategories(categories)}
+                />
+                <Sort sortingTechnique={sortingTechnique} setSortingTechnique={setSortingTechnique} />
+            </div>
+        </div>
+        <div className="w-fit mx-auto mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-center">
+            {
+                processPosts({ content: posts, categories: chosenCategories.map(c => c.value), searchQuery: searchQuery, sortingTechnique: sortingTechnique, pageIndex }).map((item, index, arr) => (
+                    <FullCard
+                        className={cn(arr.length - 1 === index && "self-start")}
+                        // biome-ignore lint/suspicious/noArrayIndexKey: No other option for testing
+                        key={item.href.current + index}
+                        {...item}
+                    />
+                ))
+            }
+        </div>
+        <Pagination className="mt-10">
+            <PaginationContent>
+                <PaginationItem onClick={() => pageIndex && setPageIndex(prev => prev - 1)} className={cn(pageIndex || "cursor-not-allowed opacity-60")}>
+                    <PaginationPrevious className={cn(pageIndex || "cursor-not-allowed", pageIndex && "cursor-pointer")} />
+                </PaginationItem>
                 {
-                    processPosts({ content: posts, categories: chosenCategories.map(c => c.value), searchQuery: searchQuery, sortingTechnique: sortingTechnique, pageIndex }).map((item, index, arr) => (
-                        <FullCard
-                            className={cn(arr.length - 1 === index && "self-start")}
-                            // biome-ignore lint/suspicious/noArrayIndexKey: No other option for testing
-                            key={item.href.current + index}
-                            {...item}
-                        />
+                    Array(numPages).fill(null).map((_, i) => (
+                        // biome-ignore lint/suspicious/noArrayIndexKey: No Other Option
+                        (<PaginationItem key={_ + i} onClick={() => setPageIndex(i)}>
+                            <PaginationLink className={cn("cursor-pointer", pageIndex === i && "bg-zinc-500 bg-opacity-20 border-[1px] border-zinc-400")}>{i + 1}</PaginationLink>
+                        </PaginationItem>)
                     ))
                 }
-            </div>
-
-            <Pagination className="mt-10">
-                <PaginationContent>
-                    <PaginationItem onClick={() => pageIndex && setPageIndex(prev => prev - 1)} className={cn(pageIndex || "cursor-not-allowed opacity-60")}>
-                        <PaginationPrevious className={cn(pageIndex || "cursor-not-allowed", pageIndex && "cursor-pointer")} />
-                    </PaginationItem>
-                    {
-                        Array(numPages).fill(null).map((_, i) => (
-                            // biome-ignore lint/suspicious/noArrayIndexKey: No Other Option
-                            <PaginationItem key={_ + i} onClick={() => setPageIndex(i)}>
-                                <PaginationLink className={cn("cursor-pointer", pageIndex === i && "bg-zinc-500 bg-opacity-20 border-[1px] border-zinc-400")}>{i + 1}</PaginationLink>
-                            </PaginationItem>
-                        ))
-                    }
-                    <PaginationItem onClick={() => (numPages - 1 === pageIndex) || setPageIndex(prev => prev + 1)} className={cn((numPages - 1 === pageIndex) && "cursor-not-allowed opacity-60")}>
-                        <PaginationNext className={cn((numPages - 1 === pageIndex) && "cursor-not-allowed", (numPages - 1 === pageIndex) || "cursor-pointer")} />
-                    </PaginationItem>
-                </PaginationContent>
-            </Pagination>
-        </>
-    )
+                <PaginationItem onClick={() => (numPages - 1 === pageIndex) || setPageIndex(prev => prev + 1)} className={cn((numPages - 1 === pageIndex) && "cursor-not-allowed opacity-60")}>
+                    <PaginationNext className={cn((numPages - 1 === pageIndex) && "cursor-not-allowed", (numPages - 1 === pageIndex) || "cursor-pointer")} />
+                </PaginationItem>
+            </PaginationContent>
+        </Pagination>
+    </>);
 }

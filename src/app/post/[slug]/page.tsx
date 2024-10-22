@@ -24,7 +24,7 @@ import Link from "next/link"
 import type { z } from "zod"
 import Rater from "../../../components/rater"
 
-const firaCode = Fira_Code({
+export const firaCode = Fira_Code({
   subsets: ["latin-ext"],
   weight: ["300", "500", "700"],
 });
@@ -93,51 +93,58 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <CountViews documentId={post._id} />
-        <div className="space-y-4 mt-2">
-          <div className="flex items-center space-x-2">
-            {
-              post.categories.map(category => (
-                <Badge className="rounded-sm cursor-default bg-zinc-800 hover:bg-zinc-800 border-[1px] border-zinc-400 text-zinc-200" key={category.slug.current}>{category.title}</Badge>
-              ))
-            }
-          </div>
-          <h1 className="text-5xl font-bold">{post.title}</h1>
-          <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-            <div className="flex items-center">
-              <span className={cn("flex items-center justify-center gap-1",
-                (Math.floor(post.rating) - post.rating < 0) && "ml-0"
-              )}>
+        <div className="rounded-tr-xl rounded-tl-xl relative overflow-hidden aspect-[16_/_7] mt-4 my-8">
+          {post?.bannerImage && "asset" in post.bannerImage && <Image
+            src={urlFor(post.bannerImage.asset).url()}
+            alt="AI and Web Development"
+            width={800}
+            height={400}
+            className="rounded-tr-xl rounded-tl-xl object-cover w-full aspect-[16_/_7] object-center [filter:url(#glow)]"
+          />}
+          <div className="absolute w-full h-full top-0 left-0" style={{
+            backgroundImage: "linear-gradient(0deg, rgb(9, 9, 11, var(--tw-bg-opacity)) 0%, transparent 69%)"
+          }}></div>
+          <div className="flex flex-col gap-2 absolute w-full h-full top-0 left-0 justify-end px-4 pb-4">
+            <CountViews documentId={post._id} />
+            <div className="space-y-2 mt-2">
+              <div className="flex items-center space-x-2">
                 {
-                  [
-                    Array(Math.floor(post.rating)).fill(null).map((item, index) => <StarIcon className="w-4 h-4 text-yellow-400" key={`star456-${item + index}`} />)
-                  ]
+                  post.categories.map(category => (
+                    <Badge className="rounded-sm cursor-default bg-zinc-800 hover:bg-zinc-800 border-[1px] border-zinc-400 text-zinc-200" key={category.slug.current}>{category.title}</Badge>
+                  ))
                 }
-                {
-                  [
-                    (Math.floor(post.rating) - post.rating < 0) && <StarHalfIcon className="w-4 h-4 text-yellow-400" />
-                  ]
-                }
-              </span>
-              <span>{post.rating}</span>
-            </div>
-            <div className="flex items-center">
-              <Eye className="mr-1 h-4 w-4 text-blue-400" />
-              <span>{post.baseViews + post.actualViews} views</span>
-            </div>
-            <div className="flex items-center">
-              <Clock className="mr-1 h-4 w-4 text-teal-400" />
-              <span>8 min read</span>
+              </div>
+              <h1 className="text-5xl !mt-2 font-bold">{post.title}</h1>
+              <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                <div className="flex items-center">
+                  <span className={cn("flex items-center justify-center gap-1",
+                    (Math.floor(post.rating) - post.rating < 0) && "ml-0"
+                  )}>
+                    {
+                      [
+                        Array(Math.floor(post.rating)).fill(null).map((item, index) => <StarIcon className="w-4 h-4 text-yellow-400" key={`star456-${item + index}`} />)
+                      ]
+                    }
+                    {
+                      [
+                        (Math.floor(post.rating) - post.rating < 0) && <StarHalfIcon className="w-4 h-4 text-yellow-400" />
+                      ]
+                    }
+                  </span>
+                  <span>{post.rating}</span>
+                </div>
+                <div className="flex items-center">
+                  <Eye className="mr-1 h-4 w-4 text-blue-400" />
+                  <span>{post.baseViews + post.actualViews} views</span>
+                </div>
+                <div className="flex items-center">
+                  <Clock className="mr-1 h-4 w-4 text-teal-400" />
+                  <span>8 min read</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        {post?.bannerImage && "asset" in post.bannerImage && <Image
-          src={urlFor(post.bannerImage.asset).url()}
-          alt="AI and Web Development"
-          width={800}
-          height={400}
-          className="my-8 rounded-xl object-cover w-full aspect-video object-center [filter:url(#glow)]"
-        />}
         <div className="prose prose-lg max-w-none text-lg">
           <PortableText
             value={post.body}
@@ -154,6 +161,7 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                     language: string;
                   }
                 }) => {
+                  // console.log(others)
                   return (
                     <Code value={value} />
                   );
