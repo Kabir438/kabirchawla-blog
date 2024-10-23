@@ -83,10 +83,12 @@ export default function SanityImageContent({
                 typeof width === "number" && `w-[${width}px]`,
                 typeof width === "string" && width.endsWith("px") && `w-[${width}]`,
                 typeof width === "string" && !width.endsWith("px") && width,
-                "rounded-xl overflow-hidden"
+                "rounded-xl overflow-hidden",
+                `aspect-[${data?.aspectRatio}_/_1]`
             )}
             style={{
-                filter: src.glow ? "url(#glow)" : undefined
+                filter: src.glow ? "url(#glow)" : undefined,
+                aspectRatio: `${data?.aspectRatio} / 1`
             }}
         >
             {isPending && <p>Loading Image...</p>}

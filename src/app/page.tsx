@@ -16,11 +16,13 @@ export default async function Home() {
   const categories = await getCategories();
   // console.log(blogs, categories)
   return (
-    <main className="flex-col flex items-start gap-2 p-6 px-12">
+    <main className="flex-col flex items-start gap-2 p-2 px-5 sm:p-6 sm:px-12">
       <a href="https://kabirchawla.com/?from=blog">
-        <Button variant={"secondary"} className="group/button bg-slate-400 mb-3 border-[2px] border-slate-200 border-opacity-0 font-semibold text-md bg-opacity-15 hover:border-opacity-95 hover:bg-slate-400 hover:bg-opacity-25">
+        <Button style={{
+          height: "max-content"
+        }} variant={"secondary"} className="group/button bg-slate-400 mt-3 sm:mt-0 justify-start !px-2 sm:!px-4 mb-3 flex flex-wrap w-min sm:w-max sm:flex-nowrap !h-[unset] border-[2px] border-slate-200 border-opacity-0 font-semibold text-md bg-opacity-15 hover:border-opacity-95 hover:bg-slate-400 hover:bg-opacity-25">
           <ArrowLeft className="group-hover/button:mr-2 transition-all" />
-          Go Back to<span className="text-[#ffd9ae] group-hover/button:text-[#ffffff] hover:[text-shadow:0px_0px_4px_#ffffff] [text-shadow:0px_0px_4px_#ffd9aeaa] ml-1 underline">KabirChawla.com</span>
+          Go Back to<span className="text-[#ffd9ae] group-hover/button:text-[#ffffff]  hover:[text-shadow:0px_0px_4px_#ffffff] [text-shadow:0px_0px_4px_#ffd9aeaa] ml-1 underline">KabirChawla.com</span>
         </Button>
       </a>
       <h1 className={`w-full flex justify-center items-center text-white text-5xl font-semibold ${poppins.className}`}>Kabir Chawla{"'"}s Blog</h1>

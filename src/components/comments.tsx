@@ -1,7 +1,6 @@
 "use client"
 
 import publishComments from "@/actions/publishComments";
-import { timeAgo } from "@/app/post/[slug]/page";
 import useTime from "@/hooks/useTime";
 import type getBlog from "@/utils/getBlog";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
@@ -9,6 +8,7 @@ import { useState } from "react"
 import { adjectives, animals, uniqueNamesGenerator } from "unique-names-generator";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import timeAgo from "@/utils/timeAgo";
 
 function stringToPastelColor(seed: string): string {
     // Simple hash function to convert string to a number

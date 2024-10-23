@@ -3,7 +3,6 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query';
-import NextProgress from "next-progress";
 import type { PropsWithChildren } from 'react';
 
 const queryClient = new QueryClient()

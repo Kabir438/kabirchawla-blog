@@ -114,7 +114,7 @@ export default function BrowseBlog({
         }
     }, [searchQuery, sortingTechnique])
     return (<>
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between flex-col sm:flex-row items-end gap-1 sm:gap-0 sm:items-start w-full">
             <div className="relative">
                 <Input
                     value={searchQuery}
@@ -126,7 +126,7 @@ export default function BrowseBlog({
                 />
                 <Search className="absolute w-4 h-4 right-1 top-1/2 text-gray-300 -translate-y-1/2 -translate-x-1/2" />
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col items-end md:flex-row gap-1 sm:gap-2">
                 <Filters
                     categories={chosenCategories}
                     setCategories={setChosenCategories}
@@ -135,7 +135,7 @@ export default function BrowseBlog({
                 <Sort sortingTechnique={sortingTechnique} setSortingTechnique={setSortingTechnique} />
             </div>
         </div>
-        <div className="w-fit mx-auto mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-center">
+        <div className="w-fit mx-auto mt-10 sm:mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-center">
             {
                 processPosts({ content: posts, categories: chosenCategories.map(c => c.value), searchQuery: searchQuery, sortingTechnique: sortingTechnique, pageIndex }).map((item, index, arr) => (
                     <FullCard

@@ -113,3 +113,25 @@ span[title="Unfold line"] {
   border: 1px solid #7aa2f7 !important;
   color: #000000 !important;
 }
+
+.gradient-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 12px; */
+  border: 1px solid #0000;
+  background: linear-gradient(#131219, #131219) padding-box, linear-gradient(var(--angle), #c55cff, #687aff) border-box;
+  animation: 2s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}

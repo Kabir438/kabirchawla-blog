@@ -1,15 +1,16 @@
 // import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import 'easymde/dist/easymde.min.css';
 import SVGFilters from "@/components/svgFilters";
 import Providers from "../components/providers";
+import { inter } from "./fonts";
 
-export const inter = Inter({
-  subsets: ["latin-ext"],
-  weight: ["400", "500", "600", "800"],
-  variable: '--font-inter',
-});
+// export const inter = Inter({
+//   subsets: ["latin-ext"],
+//   weight: ["400", "500", "600", "800"],
+//   variable: '--font-inter',
+// });
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",

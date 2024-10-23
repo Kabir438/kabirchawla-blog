@@ -47,7 +47,6 @@ export default function FullCard(props: Awaited<ReturnType<typeof getBlogs>>[num
           style={{
             transform
           }}
-          // @ts-expect-error Works
           className={"group-[.unhovered]/card:!transform-none transform-gpu"}
         >
           <div className="flex flex-nowrap items-end mt-2 text-sm text-gray-400 justify-between relative -bottom-1">
@@ -78,7 +77,7 @@ export default function FullCard(props: Awaited<ReturnType<typeof getBlogs>>[num
           <div className="flex flex-wrap gap-2 mt-3 group-[.hovered]/card:[-4px_-4px_7px_#575757,_4px_4px_7px_#575757] group-[.hovered]/card:scale-110 group-[.hovered]/card:translate-x-[5%] transition-all ease-in-out pr-[5%]">
             {
               props.categories.map(category => (
-                <Badge className="rounded-sm cursor-default bg-zinc-800 hover:bg-zinc-800 border-[1px] border-zinc-400 text-zinc-200" key={`cat1-${category.slug.current}`}>{category.title}</Badge>
+                <Badge className="gradient-box rounded-sm cursor-default bg-zinc-800 hover:bg-zinc-800 border-[1px] border-zinc-400 text-zinc-200" key={`cat1-${category.slug.current}`}>{category.title}</Badge>
               ))
             }
           </div>
@@ -205,7 +204,6 @@ export const CardSkeletonContainer = ({
   const transform = useMotionTemplate`translate(${x}px, ${y}px)`;
   return (
     <motion.div
-      // @ts-expect-error Works
       className={cn(
         "h-[unset] md:h-[20rem] rounded-xl z-40 group-[.unhovered]/card:!transform-none overflow-hidden",
         className,
