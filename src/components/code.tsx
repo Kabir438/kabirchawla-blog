@@ -1,6 +1,6 @@
 "use client"
 
-import { firaCode } from "@/app/post/[slug]/page";
+import { firaCode } from "@/app/fonts";
 import { cn } from "@/lib/utils";
 import getCodeMirrorExtensions from "@/utils/getCodeMirrorExtensions";
 import { tokyoNight } from "@uiw/codemirror-theme-tokyo-night"

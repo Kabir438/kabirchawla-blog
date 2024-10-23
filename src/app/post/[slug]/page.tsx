@@ -1,4 +1,4 @@
-import { inter } from "@/app/fonts"
+import { firaCode, inter } from "@/app/fonts"
 import BlogTable from "@/components/blog-table"
 import Code from "@/components/code"
 import Comments from "@/components/comments"
@@ -18,16 +18,10 @@ import type { imageSchema } from "@/utils/contentType"
 import getBlog from "@/utils/getBlog"
 import { PortableText } from "@portabletext/react"
 import { ArrowLeft, Clock, Eye, StarHalfIcon, StarIcon } from "lucide-react"
-import { Fira_Code } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import type { z } from "zod"
 import Rater from "../../../components/rater"
-
-export const firaCode = Fira_Code({
-  subsets: ["latin-ext"],
-  weight: ["300", "500", "700"],
-});
 
 export default async function BlogPost(props0: { params: Promise<{ slug: string; }> }) {
   const params = await props0.params;

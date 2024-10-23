@@ -102,7 +102,6 @@ const StyledSort = React.forwardRef<HTMLDivElement, {
                 transition={{
                     duration: 2000
                 }}
-                // @ts-expect-error Works
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => {
                     if (focused) {
