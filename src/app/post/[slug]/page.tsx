@@ -135,7 +135,7 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                 </div>
                 <div className="flex items-center">
                   <Clock className="mr-1 h-4 w-4 text-teal-400" />
-                  <span>8 min read</span>
+                  <span>{post.timeTakenToRead} read</span>
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
           </div>
           <div className="flex items-center">
             <Clock className="mr-1 h-4 w-4 text-teal-400" />
-            <span>8 min read</span>
+            <span>{post.timeTakenToRead} read</span>
           </div>
         </div>
         <div className="prose prose-lg max-w-none text-lg">
