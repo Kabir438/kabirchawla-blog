@@ -26,6 +26,7 @@ export const postType = defineType({
     defineField({
       name: 'image',
       type: 'image',
+      description: "The image should be a square!",
       options: {
         hotspot: true,
       },
@@ -42,6 +43,7 @@ export const postType = defineType({
       name: 'bannerImage',
       type: 'image',
       title: "Banner Image",
+      description: "Aspect Ratio should be: 16 / 7",
       options: {
         hotspot: true,
       },
