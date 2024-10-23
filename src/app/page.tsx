@@ -5,16 +5,58 @@ import { ArrowLeft } from "lucide-react"
 import { Poppins } from "next/font/google";
 import getBlogs from "../utils/getBlogs";
 import getCategories from "../utils/getCategories";
+import { Metadata } from "next";
 
 const poppins = Poppins({
   subsets: ["latin-ext"],
   weight: ["400", "600", "800"],
 })
 
+export const metadata: Metadata = {
+  "title": "Kabir Chawla's Blog | Fullstack Developer and AI Enthusiast",
+  "description": "Kabir Chawla shares insights into fullstack web development, app development, AI, and more. Explore topics like React, Next.js, Flutter, and AI innovations, along with personal experiences and projects.",
+  "keywords": [
+    "Kabir Chawla blog",
+    "fullstack developer blog",
+    "web development insights",
+    "React tutorials",
+    "Next.js guides",
+    "Flutter development",
+    "AI in healthcare",
+    "AI projects",
+    "Swasthya Samadhan",
+    "coding blog",
+    "tech blog",
+    "entrepreneurship",
+    "innovation in tech"
+  ],
+  // "author": "Kabir Chawla",
+  authors: [{
+    name: "Kabir Chawla",
+    url: "https://kabirchawla.com"
+  }],
+  "robots": "index, follow",
+  openGraph: {
+    "title": "Kabir Chawla's Blog | Fullstack Developer and AI Enthusiast",
+    "description": "Explore Kabir Chawla's journey in fullstack web and app development, including projects in AI and healthcare. Discover tutorials, projects, and tips for aspiring developers.",
+    "url": "https://blog.kabirchawla.com",
+    "type": "website",
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "site": "@KabirChawla14",
+    "title": "Kabir Chawla's Blog | Fullstack Developer and AI Enthusiast",
+    "description": "Discover Kabir Chawla's journey in tech and AI, from fullstack development to AI projects like Swasthya Samadhan.",
+    // "image": "https://yourblogurl.com/twitter-image.png"
+  },
+  colorScheme: "dark",
+  themeColor: "#000000"
+}
+
+
 export default async function Home() {
   const blogs = await getBlogs();
   const categories = await getCategories();
-  // console.log(blogs, categories)
   return (
     <main className="flex-col flex items-start gap-2 p-2 px-5 sm:p-6 sm:px-12">
       <a href="https://kabirchawla.com/?from=blog">

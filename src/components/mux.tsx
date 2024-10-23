@@ -14,10 +14,7 @@ export default function MuxVideo({
   className?: string;
 }) {
   const { isPending, error, data } = useQuery({ queryFn: async () => getVideo(assetKey), queryKey: [`asset-${assetKey}`] })
-  if (isPending || !!error || !data) return <>{data || "data"}</>;
-  console.log("data", data)
-  // return <></>
-  // const { asset: { playbackId } } = data;
+  if (isPending || !!error || !data) return <>{data || "data"}</>
   return (
     <ErrorBoundary
       fallback={

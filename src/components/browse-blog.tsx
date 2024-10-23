@@ -23,7 +23,6 @@ const applySearch = (content: Awaited<ReturnType<typeof getBlogs>>, searchQuery:
 }
 
 const applyFilters = (content: Awaited<ReturnType<typeof getBlogs>>, categories: string[]) => {
-    // console.log(categories, content.filter(content => content.categories.findIndex(category => categories.map(c => c.trim().toLowerCase()).includes(category.trim().toLowerCase())) !== -1))
     return content.filter(content => content.categories.findIndex(category => categories.map(c => c.trim().toLowerCase()).includes(category.slug.current.trim().toLowerCase())) !== -1) satisfies Awaited<ReturnType<typeof getBlogs>>;
 }
 

@@ -75,7 +75,6 @@ export default function SanityImageContent({
     const ref = useRef<HTMLDivElement>(null)
     const { isPending, error, data } = useImageLoader({ src, ref });
 
-    console.log(src)
     return (
         <div
             ref={ref}

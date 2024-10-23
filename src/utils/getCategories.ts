@@ -18,7 +18,5 @@ export default async function getCategories() {
 
     const result = await client.fetch(query, {}, { cache: 'no-store' });
     const parsedResult = schema.parse(result);
-    // console.log(result[0].author.bio)
     return parsedResult;
-    // return result;
 }

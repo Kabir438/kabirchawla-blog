@@ -8,7 +8,7 @@ const publishComments = async (comments: {
     commented_at: string;
 }, documentId: string) => {
     try {
-        const res = await db
+        await db
             .collection("posts")
             .doc(documentId)
             .collection("comments")
@@ -17,9 +17,8 @@ const publishComments = async (comments: {
                 name: comments.name,
                 commented_at: comments.commented_at
             })
-        console.log(res)
     } catch (err) {
-        console.log(err, "error creating");
+        console.error(err)
     }
 }
 

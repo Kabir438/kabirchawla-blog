@@ -12,7 +12,6 @@ export default function Filter({
     categories: Option[];
     setCategories: Dispatch<SetStateAction<Option[]>>
 }) {
-    console.log(categories, options);
     return (
         <FancyMultiSelect chosenOptions={categories} updateChosenOptions={setCategories} options={options} className="[justify-self:start]"></FancyMultiSelect>
     )

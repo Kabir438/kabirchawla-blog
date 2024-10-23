@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   componentDidCatch(error: unknown, errorInfo: React.ErrorInfo): void {
     // You can use your own error logging service here
-    console.log({ error, errorInfo });
+    console.error({ error, errorInfo });
   }
 
   render() {

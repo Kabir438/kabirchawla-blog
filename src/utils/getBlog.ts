@@ -13,10 +13,7 @@ const commentsSchema = z.array(z.object({
 
 export default async function getBlog(slug: string) {
     const query = `*[_type == "post" && slug.current == ${slug}]{...,author->{...},categories[]->{...},comments[]->{...}}`;
-    // const query = `*[_type == "post"]`;
-    // console.log(query, slug, await client.projects.list());
     const result = await client.fetch(query, {}, { cache: 'no-cache' });
-    console.log(result[0].body[13]);
     const parsedResult = await blogsSchema.parseAsync(result);
     const firebaseRes = await db
         .collection("posts")

@@ -3,7 +3,6 @@
 import admin, { db } from "./firebase"
 
 const incrementViewCount = async (documentId: string) => {
-    console.log("IncrementViewCount called")
     try {
         // const res = await client
         //     .patch(documentId)

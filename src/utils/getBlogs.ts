@@ -103,7 +103,6 @@ export default async function getBlogs() {
 
     const result = await client.fetch(query, {}, { cache: 'no-store' });
     const parsedResult = blogsSchema.parse(result);
-    console.log(result)
     const updatedResult = await Promise.all(parsedResult.map(async (result) => {
         const firebaseRes = await db
             .collection("posts")

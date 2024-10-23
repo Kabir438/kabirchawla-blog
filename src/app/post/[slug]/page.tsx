@@ -23,6 +23,40 @@ import Link from "next/link"
 import type { z } from "zod"
 import Rater from "../../../components/rater"
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; }> }) {
+  const post = await getBlog((await params).slug);
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: `/blog/${post.href}`, // Assuming slug is part of the URL
+      type: 'article',
+      article: {
+        publishedTime: new Date(post.publishedAt).toISOString(),
+        authors: [post.author.name], // Assuming the author object has a 'name' field
+        tags: post.categories.map((category) => category.title), // Assuming 'categories' have a 'name' field
+      },
+      images: [
+        {
+          url: urlFor(post.image).url(), // Assuming imageSchema contains a 'url'
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [urlFor(post.image).url()],
+    },
+    alternates: {
+      canonical: `/post/${post.href}`,
+    },
+  }
+}
+
 export default async function BlogPost(props0: { params: Promise<{ slug: string; }> }) {
   const params = await props0.params;
 
@@ -31,8 +65,6 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
   } = params;
 
   const post = await getBlog(slug);
-  // console.log(post);
-  // return <></>
   return (
     <>
       <article className="container mx-auto px-8 py-8">
@@ -152,7 +184,6 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                     language: string;
                   }
                 }) => {
-                  // console.log(others)
                   return (
                     <Code value={value} />
                   );
@@ -179,7 +210,6 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                     _key: string,
                   }
                 }) => {
-                  console.log("hello", value)
                   return (
                     // <YouTube className={cn(`lg:w-[700px] w-[300px] h-auto`)} videoId={value.videoId} opts={{
                     //   autoplay: value.autoplay,
@@ -199,7 +229,6 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                     }[];
                   }
                 }) => {
-                  // console.log(JSON..stringify(props.value))
                   return <BlogTable value={props.value} />
                 }
               },

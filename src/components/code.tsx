@@ -13,7 +13,6 @@ export default function Code({ value }: {
         filename?: string | undefined;
     }
 }) {
-    console.log("value", value)
     return (
         <div className="relative mt-16 mb-8">
             {value.filename && <div className={cn("px-2 w-max rounded-tr-lg absolute top-0 h-8 z-50 !border-b-[#1c1c27] bg-[#1c1c27] -translate-y-[calc(100%_-_2px)] rounded-tl-lg left-[16px] [border:2px_solid_rgb(209,_213,_219)] border-b-0", firaCode.className)}>

@@ -136,7 +136,6 @@ function FancyMultiSelect({
                                         >
                                             <Checkbox
                                                 onToggle={(event) => {
-                                                    // console.log(event.currentTarget)
                                                     if (event.newState === "open") {
                                                         updateChosenOptions((prev) => [...prev, option]);
                                                     } else {

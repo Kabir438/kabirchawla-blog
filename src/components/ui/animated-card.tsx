@@ -31,7 +31,7 @@ export default function FullCard(props: Awaited<ReturnType<typeof getBlogs>>[num
           mouseY={mouseY}
           cardWidth={width}
         >
-          <CardContent >
+          <CardContent>
             {"asset" in props.image && <Image
               // src="https://images.unsplash.com/photo-1544077960-604201fe74bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1651&q=80"
               // alt="Random Image"
@@ -97,7 +97,7 @@ const CardContent = ({
       style={{
         aspectRatio: "1 / 1",
         maxWidth: "100%"
-      }} className="p-8 overflow-hidden h-full relative flex items-center justify-center group-[.hovered]/card:[-4px_-4px_7px_#575757,_4px_4px_7px_#575757] group-[.hovered]/card:scale-110 group-[.hovered]/card:translate-x-[5%] transition-all ease-in-out">
+      }} className="p-8 overflow-hidden h-full relative flex items-center justify-center group-[.hovered]/card:!w-[90.9%] group-[.hovered]/card:[-4px_-4px_7px_#575757,_4px_4px_7px_#575757] group-[.hovered]/card:scale-110 group-[.hovered]/card:translate-x-[5%] transition-all ease-in-out">
       {children}
     </div>
   );
@@ -124,8 +124,6 @@ export const Card = ({
     clientY: number,
   }) {
     const { left, top } = currentTarget.getBoundingClientRect();
-
-    // console.log(clientX - left)
 
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
