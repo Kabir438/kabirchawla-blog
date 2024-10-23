@@ -9,7 +9,7 @@ import CodeMirror from "@uiw/react-codemirror"
 export default function Code({ value }: {
     value: {
         code: string;
-        language: string;
+        language?: string;
         filename?: string | undefined;
     }
 }) {

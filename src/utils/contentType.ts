@@ -85,7 +85,8 @@ const contentSchema = z.array(
     youtubeVideoSchema,
     tableSchema,
     muxVideoSchema,
-    imageSchema
+    imageSchema,
+    z.any()
   ])
 );
 

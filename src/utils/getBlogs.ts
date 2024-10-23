@@ -95,7 +95,7 @@ export const blogsSchema = z.array(z.strictObject({
         name: z.string(), 
         commented_at: z.string().refine(i => !Number.isNaN(Date.parse(i))), 
         message: z.string()
-    }))
+    })).nullable()
 }))
 
 export default async function getBlogs() {

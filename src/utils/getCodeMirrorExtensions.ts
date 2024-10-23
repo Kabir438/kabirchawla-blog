@@ -16,8 +16,8 @@ import { shell } from '@codemirror/legacy-modes/mode/shell';
 import { xml } from '@codemirror/legacy-modes/mode/xml';
 import { csharp } from "@replit/codemirror-lang-csharp";
 
-export default function getCodeMirrorExtensions(language: string) {
-    switch (language.toLowerCase()) {
+export default function getCodeMirrorExtensions(language: string | undefined) {
+    switch (language?.toLowerCase()) {
         case 'c#':
             return [csharp()]
         case 'css':

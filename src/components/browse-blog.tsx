@@ -138,7 +138,7 @@ export default function BrowseBlog({
             {
                 processPosts({ content: posts, categories: chosenCategories.map(c => c.value), searchQuery: searchQuery, sortingTechnique: sortingTechnique, pageIndex }).map((item, index, arr) => (
                     <FullCard
-                        className={cn(arr.length - 1 === index && "self-start")}
+                        className={cn(arr.length - 1 === index && "self-start", "w-[320px]")}
                         // biome-ignore lint/suspicious/noArrayIndexKey: No other option for testing
                         key={item.href.current + index}
                         {...item}
