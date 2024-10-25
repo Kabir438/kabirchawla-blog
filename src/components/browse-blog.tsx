@@ -29,7 +29,7 @@ const applyFilters = (content: Awaited<ReturnType<typeof getBlogs>>, categories:
 const applySort = (content: Awaited<ReturnType<typeof getBlogs>>, sortingTechnique: "relevant" | "latest" | "popular" | "ascending" | "descending" | "rating") => {
     switch (sortingTechnique) {
         case "latest":
-            return content.sort((a, b) => Date.parse(a.publishedAt) - Date.parse(b.publishedAt));
+            return content.sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
         case "popular":
             return content.sort((a, b) => ((b.baseViews)
                 //  + b.actualViews
@@ -84,7 +84,7 @@ const processPosts = ({
 //     { label: "General", value: "general" },
 // ]
 
-const SORTING_TECHNIQUES = ["relevant", "latest", "popular", "ascending", "descending", "rating"] as const
+const SORTING_TECHNIQUES = ["latest", "relevant", "popular", "ascending", "descending", "rating"] as const
 
 const simplifyCategories = (categories: Awaited<ReturnType<typeof getCategories>>) => categories.map(c => ({
     label: c.title,
@@ -134,7 +134,7 @@ export default function BrowseBlog({
                 <Sort sortingTechnique={sortingTechnique} setSortingTechnique={setSortingTechnique} />
             </div>
         </div>
-        <div className="w-fit mx-auto mt-10 sm:mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-center">
+        <div className="w-fit mx-auto mt-10 sm:mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-start">
             {
                 processPosts({ content: posts, categories: chosenCategories.map(c => c.value), searchQuery: searchQuery, sortingTechnique: sortingTechnique, pageIndex }).map((item, index, arr) => (
                     <FullCard

@@ -22,6 +22,7 @@ import Image from "next/image"
 import Link from "next/link"
 import type { z } from "zod"
 import Rater from "../../../components/rater"
+import React, { isValidElement } from "react"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; }> }) {
   const post = await getBlog((await params).slug);
@@ -56,6 +57,39 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
   }
 }
+
+const Boldify = ({ children }: { children: React.ReactNode }) => {
+  const processText = (text: string) => {
+    const parts = text.split(/(__.*?__)/g); // Split the text by double underscores
+    return parts.map((part, index) =>
+      part.startsWith('__') && part.endsWith('__') ? (
+        <b key={index}>{part.slice(2, -2)}</b> // Remove underscores, wrap in <b>
+      ) : (
+        part
+      )
+    );
+  };
+
+  const renderChildren = (node: React.ReactNode): React.ReactNode => {
+    // If the node is a string, process the text
+    if (typeof node === 'string') {
+      return processText(node);
+    }
+
+    // If it's a valid React element, recursively process its children
+    if (isValidElement(node) && node.props.children) {
+      return React.cloneElement(node, {
+        // @ts-expect-error idk
+        children: React.Children.map(node.props.children, renderChildren),
+      });
+    }
+
+    // If it's neither a string nor a valid element, return it as-is
+    return node;
+  };
+
+  return <>{React.Children.map(children, renderChildren)}</>;
+};
 
 export default async function BlogPost(props0: { params: Promise<{ slug: string; }> }) {
   const params = await props0.params;
@@ -243,15 +277,18 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                 ),
               },
               block: {
-                h1: ({ children }) => <h1 className="text-4xl font-bold">{children}</h1>,
+                h1: ({ children }) => <h1 className="text-4xl font-bold mt-4 mb-2">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-3xl font-bold mt-4">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-2xl font-bold mt-4">{children}</h3>,
+                normal: ({ children }) => <p className="text-lg mb-2">{children}</p>,
               },
               list: {
-                number: ({ children }) => <ol className={cn("mt-xl list-decimal pl-[17px]")}>{children}</ol>,
-                bullet: ({ children }) => <ul className="mt-xl list-disc pl-[15px]">{children}</ul>,
+                number: ({ children }) => <ol className={cn("mt-xl list-decimal pl-[17px]")}><Boldify>{children}</Boldify></ol>,
+                bullet: ({ children }) => <ul className="mt-xl list-disc pl-[15px]"><Boldify>{children}</Boldify></ul>,
               },
               listItem: {
-                number: ({ children }) => <li className={cn(`marker:font-[${inter.variable}] marker:!ordinal`, inter.className)}>{children}</li>,
-                bullet: ({ children }) => <li>{children}</li>,
+                number: ({ children }) => <li className={cn(`marker:font-[${inter.variable}] marker:!ordinal`, inter.className)}><Boldify>{children}</Boldify></li>,
+                bullet: ({ children }) => <li><Boldify>{children}</Boldify></li>,
               }
             }}
           // components={/* optional object of custom components to use */}

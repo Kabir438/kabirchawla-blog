@@ -40,6 +40,7 @@ export default function Comments({
 }: {
     post: Awaited<ReturnType<typeof getBlog>>
 }) {
+
     const [myComments, setMyComments] = useState<null | typeof post['comments']>(null)
     const time = useTime();
     return (
