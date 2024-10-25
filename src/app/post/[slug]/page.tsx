@@ -17,7 +17,7 @@ import { urlFor } from "@/sanity/lib/image"
 import type { imageSchema } from "@/utils/contentType"
 import getBlog from "@/utils/getBlog"
 import { PortableText } from "@portabletext/react"
-import { ArrowLeft, Clock, Eye, StarHalfIcon, StarIcon } from "lucide-react"
+import { ArrowLeft, Clock, Eye, QuoteIcon, StarHalfIcon, StarIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import type { z } from "zod"
@@ -281,6 +281,14 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                 h2: ({ children }) => <h2 className="text-3xl font-bold mt-4">{children}</h2>,
                 h3: ({ children }) => <h3 className="text-2xl font-bold mt-4">{children}</h3>,
                 normal: ({ children }) => <p className="text-lg mb-2">{children}</p>,
+                blockquote: ({ children }) => (
+                  <div className="relative my-6 p-6 bg-zinc-700/30 rounded-lg">
+                    <QuoteIcon className="absolute top-4 right-4 h-8 w-8 text-zinc-200 opacity-40" />
+                    <blockquote className="relative z-10 text-xl text-zinc-400 ">
+                      {children}
+                    </blockquote>
+                  </div>
+                ),
               },
               list: {
                 number: ({ children }) => <ol className={cn("mt-xl list-decimal pl-[17px]")}><Boldify>{children}</Boldify></ol>,
