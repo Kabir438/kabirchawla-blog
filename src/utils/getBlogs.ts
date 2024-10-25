@@ -101,7 +101,7 @@ export const blogsSchema = z.array(z.strictObject({
 export default async function getBlogs() {
     const query = `*[_type == "post"]{...,author->{...},categories[]->{...},comments[]->{...}}`;
 
-    const result = await client.fetch(query, {}, { cache: 'no-store' });
+    const result = await client.fetch(query, {}, { cache: 'no-cache' });
     const parsedResult = blogsSchema.parse(result);
     const updatedResult = await Promise.all(parsedResult.map(async (result) => {
         const firebaseRes = await db

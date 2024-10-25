@@ -16,7 +16,7 @@ const schema = z.array(z.object({
 export default async function getCategories() {
     const query = `*[_type == "category"]`;
 
-    const result = await client.fetch(query, {}, { cache: 'no-store' });
+    const result = await client.fetch(query, {}, { cache: 'no-cache' });
     const parsedResult = schema.parse(result);
     return parsedResult;
 }

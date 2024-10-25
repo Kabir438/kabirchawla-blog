@@ -19,12 +19,12 @@ export default function FullCard(props: Awaited<ReturnType<typeof getBlogs>>[num
   const transform = useMotionTemplate`translate(${x}px, ${y}px)`;
   // return <></>
   return (
-    <Link href={`/post/${props.href.current}`} prefetch className={props.className}>
+    <Link href={`/post/${props.href.current}`} prefetch className={cn(props.className, "h-full")}>
       <Card
         mouseX={mouseX}
         mouseY={mouseY}
         updateWidth={(newWidth: number) => setWidth(newWidth)}
-        className="min-w-64"
+        className="min-w-64 max-w-[unset] w-full h-full !mx-0"
       >
         <CardSkeletonContainer
           mouseX={mouseX}

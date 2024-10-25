@@ -134,11 +134,19 @@ export default function BrowseBlog({
                 <Sort sortingTechnique={sortingTechnique} setSortingTechnique={setSortingTechnique} />
             </div>
         </div>
-        <div className="w-fit mx-auto mt-10 sm:mt-14 flex flex-wrap gap-8 [row-gap:2rem] justify-center items-start">
+        <div className="w-fit mx-auto mt-10 sm:mt-14 flex flex-wrap justify-center items-start" style={{
+            alignItems: 'stretch',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+            gap: '30px',
+            rowGap: '30px',
+            marginTop: '20px',
+            width: '100%'
+        }}>
             {
                 processPosts({ content: posts, categories: chosenCategories.map(c => c.value), searchQuery: searchQuery, sortingTechnique: sortingTechnique, pageIndex }).map((item, index, arr) => (
                     <FullCard
-                        className={cn(arr.length - 1 === index && "self-start", "w-[320px]")}
+                        className={cn(arr.length - 1 === index && "self-start", "w-full")}
                         // biome-ignore lint/suspicious/noArrayIndexKey: No other option for testing
                         key={item.href.current + index}
                         {...item}

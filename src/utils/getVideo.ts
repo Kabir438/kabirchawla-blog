@@ -52,7 +52,7 @@ export default async function getVideo(key: string) {
         }[0]
     }[0]`;
 
-    const result = await client.fetch(query, {}, { cache: 'no-store' });
+    const result = await client.fetch(query, {}, { cache: 'no-cache' });
     const parsedResult = videoSchema.parse(result);
 
     return parsedResult;
