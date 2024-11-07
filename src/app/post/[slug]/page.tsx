@@ -91,6 +91,26 @@ const Boldify = ({ children }: { children: React.ReactNode }) => {
   return <>{React.Children.map(children, renderChildren)}</>;
 };
 
+function formatUnixTimestamp(timestamp: number): string {
+  const date = new Date(timestamp);
+  const day = date.getDate();
+  const month = date.toLocaleString('en-GB', { month: 'long' });
+  const year = date.getFullYear();
+  
+  // Function to add ordinal suffix to the day
+  const getOrdinalSuffix = (day: number): string => {
+    if (day >= 11 && day <= 13) return `${day}th`;
+    switch (day % 10) {
+      case 1: return `${day}st`;
+      case 2: return `${day}nd`;
+      case 3: return `${day}rd`;
+      default: return `${day}th`;
+    }
+  };
+
+  return `${getOrdinalSuffix(day)} ${month}, ${year}`;
+}
+
 export default async function BlogPost(props0: { params: Promise<{ slug: string; }> }) {
   const params = await props0.params;
 
@@ -99,6 +119,7 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
   } = params;
 
   const post = await getBlog(slug);
+  console.log(post )
   return (
     <>
       <article className="container mx-auto px-8 py-8">
@@ -133,7 +154,7 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
             height={400}
             className="rounded-tr-xl absolute top-0 left-0 rounded-tl-xl object-cover w-full aspect-[16/9] sm:aspect-[16_/_7] object-center [filter:url(#glow)]"
           />}
-          <div className="absolute w-full h-full top-1 left-0 md:from-[#000000_0%] from-[#000000_20%] scale-x-125 bg-gradient-to-t"></div>
+          <div className="absolute w-full h-full top-1 left-0 md:from-[#000000_0%] from-[#000000_20%] scale-x-125 bg-gradient-to-t" />
           <div className="flex flex-col relative sm:pt-0 pt-5 gap-2 w-full h-full top-0 left-0 justify-end px-4 pb-4">
             <CountViews documentId={post._id} />
             <div className="space-y-2 mt-2">
@@ -173,6 +194,7 @@ export default async function BlogPost(props0: { params: Promise<{ slug: string;
                 </div>
               </div>
             </div>
+            <span className="absolute md:bottom-4 md:top-[unset] p-1 rounded-md md:bg-transparent bg-black/40 md:p-0 top-2 right-4 md:right-2">{formatUnixTimestamp(Date.parse(post.publishedAt))}</span>
           </div>
         </div>
         <div className="flex sm:hidden sm:items-center mb-8 sm:space-x-4 items-start flex-col sm:flex-row text-sm text-muted-foreground">
